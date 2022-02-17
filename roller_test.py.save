@@ -16,17 +16,21 @@ GPIO.setup(switch, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 switch_state = 0
 previous = 0
 
+def check_switch (switch, switch_state, previous):
 
-while True:
-
-        if GPIO.input(switch) == True:
-                switch_state = 1
+	previous = switch_state
 
         if GPIO.input(switch) == False:
+                switch_state = 1
+
+        if GPIO.input(switch) == True:
                 switch_state = 0
 
         if switch_state == 1 and switch_state != previous:
-                print ("on")
+                return 1
 
-        previous = switch_state
-
+while True:
+	
+	if check_switch(switch, switch_state, previous) == 1:
+		print("on")
+	
