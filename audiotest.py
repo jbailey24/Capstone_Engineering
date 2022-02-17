@@ -12,7 +12,7 @@ import time
 import pygame
 pygame.mixer.init()
 SW = pygame.mixer.Sound("StarWars3.wav")
-CB = pygame.mixer.Sound("C1.wav")
+CB = pygame.mixer.Sound("D3.wav")
 
 switch_state = 0
 previous = 0
