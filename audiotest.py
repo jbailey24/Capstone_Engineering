@@ -16,9 +16,9 @@ GPIO.setup(switch4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 import time
 import pygame
 pygame.mixer.init()
-S1 = pygame.mixer.Sound("Piano_Samples/E.wav")
-S2 = pygame.mixer.Sound("Piano_Samples/C.wav")
-S3 = pygame.mixer.Sound("Piano_Samples/C_D_E_G.wav")
+S1 = pygame.mixer.Sound("Piano_Samples/C.wav")
+S2 = pygame.mixer.Sound("Piano_Samples/D.wav")
+S3 = pygame.mixer.Sound("Piano_Samples/E.wav")
 S4 = pygame.mixer.Sound("Piano_Samples/G.wav")
 
 switch_state = 0
