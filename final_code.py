@@ -1,4 +1,5 @@
 import pygame
+import datetime
 from time import sleep
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
@@ -34,62 +35,79 @@ previous3 = 0
 switch_state4 = 0
 previous4 = 0
 
+def spin():
+	
+	start_time = (datetime.datetime.now().hour * 3600) + (datetime.now().minute * 60) + (datetime.now().second)
+	current_time = 0
+	
+	while current_time >= (start_time + 12):
+  		if GPIO.input(switch) == False:
+			switch_state = 1
+
+		if GPIO.input(switch) == True:
+			switch_state = 0
+
+		if switch_state == 1 and switch_state != previous:
+			print("C")
+			#pygame.mixer.stop()
+			pygame.mixer.Sound.play(S1)
+			while pygame.mixer.music.get_busy() == True:
+				continue
+
+		if GPIO.input(switch2) == False:
+			switch_state2 = 1
+
+		if GPIO.input(switch2) == True:
+			switch_state2 = 0
+
+		if switch_state2 == 1 and switch_state2 != previous2:
+			print("D")
+			#pygame.mixer.stop()
+			pygame.mixer.Sound.play(S2)
+			while pygame.mixer.music.get_busy() == True:
+				continue
+
+		if GPIO.input(switch3) == False:
+			switch_state3 = 1
+
+		if GPIO.input(switch3) == True:
+			switch_state3 = 0
+
+		if switch_state3 == 1 and switch_state3 != previous3:
+			print("E")
+			#pygame.mixer.stop()
+			pygame.mixer.Sound.play(S3)
+			while pygame.mixer.music.get_busy() == True:
+				continue
+
+		if GPIO.input(switch4) == False:
+			switch_state4 = 1
+
+		if GPIO.input(switch4) == True:
+			switch_state4 = 0
+
+		if switch_state4 == 1 and switch_state4 != previous4:
+			print("G")
+			#pygame.mixer.stop()
+			pygame.mixer.Sound.play(S4)
+			while pygame.mixer.music.get_busy() == True:
+				continue
+
+		time.sleep(.01)
+
+		previous = switch_state
+		previous2 = switch_state2
+		previous3 = switch_state3
+		previous4 = switch_state4
+		
+		current_time = (datetime.datetime.now().hour * 3600) + (datetime.now().minute * 60) + (datetime.now().second) 
+
 while True:
-  if GPIO.input(switch) == False:
-		switch_state = 1
-
-	if GPIO.input(switch) == True:
-		switch_state = 0
-
-	if switch_state == 1 and switch_state != previous:
-		print("C")
-		#pygame.mixer.stop()
-		pygame.mixer.Sound.play(S1)
-		while pygame.mixer.music.get_busy() == True:
-			continue
-
-	if GPIO.input(switch2) == False:
-		switch_state2 = 1
-
-	if GPIO.input(switch2) == True:
-		switch_state2 = 0
-
-	if switch_state2 == 1 and switch_state2 != previous2:
-		print("D")
-		#pygame.mixer.stop()
-		pygame.mixer.Sound.play(S2)
-		while pygame.mixer.music.get_busy() == True:
-			continue
-
-	if GPIO.input(switch3) == False:
-		switch_state3 = 1
-
-	if GPIO.input(switch3) == True:
-		switch_state3 = 0
-
-	if switch_state3 == 1 and switch_state3 != previous3:
-		print("E")
-		#pygame.mixer.stop()
-		pygame.mixer.Sound.play(S3)
-		while pygame.mixer.music.get_busy() == True:
-			continue
-
-	if GPIO.input(switch4) == False:
-		switch_state4 = 1
-
-	if GPIO.input(switch4) == True:
-		switch_state4 = 0
-
-	if switch_state4 == 1 and switch_state4 != previous4:
-		print("G")
-		#pygame.mixer.stop()
-		pygame.mixer.Sound.play(S4)
-		while pygame.mixer.music.get_busy() == True:
-			continue
-
+	if GPIO.input(button) == False:
+		GPIO.output(motor, GPIO.HIGH)
+		sleep(.01)
+		print("on")
+		spin()
+		GPIO.output(motor, GPIO.LOW)
+		print("off")
 	time.sleep(.01)
-
-	previous = switch_state
-	previous2 = switch_state2
-	previous3 = switch_state3
-	previous4 = switch_state4
