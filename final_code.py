@@ -47,7 +47,7 @@ def spin():
 		if GPIO.input(switchC) == True:
 			switch_stateC = 0
 
-		if switch_stateC == 1 and switch_stateC != previous:
+		if switch_stateC == 1 and switch_stateC != previousC:
 			print("C")
 			pygame.mixer.Sound.play(C)
 			while pygame.mixer.music.get_busy() == True:
@@ -59,7 +59,7 @@ def spin():
 		if GPIO.input(switchD) == True:
 			switch_stateD = 0
 
-		if switch_stateD == 1 and switch_stateD != previous2:
+		if switch_stateD == 1 and switch_stateD != previousD:
 			print("D")
 			pygame.mixer.Sound.play(D)
 			while pygame.mixer.music.get_busy() == True:
@@ -71,7 +71,7 @@ def spin():
 		if GPIO.input(switchE) == True:
 			switch_stateE = 0
 
-		if switch_stateE == 1 and switch_stateE != previous3:
+		if switch_stateE == 1 and switch_stateE != previousE:
 			print("E")
 			pygame.mixer.Sound.play(E)
 			while pygame.mixer.music.get_busy() == True:
@@ -83,7 +83,7 @@ def spin():
 		if GPIO.input(switchG) == True:
 			switch_stateG = 0
 
-		if switch_stateG == 1 and switch_stateG != previous4:
+		if switch_stateG == 1 and switch_stateG != previousG:
 			print("G")
 			pygame.mixer.Sound.play(G)
 			while pygame.mixer.music.get_busy() == True:
