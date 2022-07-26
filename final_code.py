@@ -5,35 +5,35 @@ import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-switch = 21
-switch2 = 26
-switch3 = 13
-switch4 = 20
+switchC = 21
+switchD = 26
+switchE = 13
+switchG = 20
 
 motor = 18
 button = 16
 
-GPIO.setup(switch, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(switch2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(switch3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(switch4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(switchC, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(switchD, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(switchE, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(switchG, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(motor, GPIO.OUT)
 GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 pygame.mixer.init()
-S1 = pygame.mixer.Sound("Piano_Samples/C.wav")
-S2 = pygame.mixer.Sound("Piano_Samples/D.wav")
-S3 = pygame.mixer.Sound("Piano_Samples/E.wav")
-S4 = pygame.mixer.Sound("Piano_Samples/G.wav")
+C = pygame.mixer.Sound("Piano_Samples/C.wav")
+D = pygame.mixer.Sound("Piano_Samples/D.wav")
+E = pygame.mixer.Sound("Piano_Samples/E.wav")
+G = pygame.mixer.Sound("Piano_Samples/G.wav")
 
-switch_state = 0
-previous = 0
-switch_state2 = 0
-previous2 = 0
-switch_state3 = 0
-previous3 = 0
-switch_state4 = 0
-previous4 = 0
+switch_stateC = 0
+previousC = 0
+switch_stateD = 0
+previousD = 0
+switch_stateE = 0
+previousE = 0
+switch_stateG = 0
+previousG = 0
 
 def spin():
 
@@ -41,60 +41,60 @@ def spin():
 	current_time = 0
 
 	while current_time < (start_time + 12):
-		if GPIO.input(switch) == False:
-			switch_state = 1
+		if GPIO.input(switchC) == False:
+			switch_stateC = 1
 
-		if GPIO.input(switch) == True:
-			switch_state = 0
+		if GPIO.input(switchC) == True:
+			switch_stateC = 0
 
-		if switch_state == 1 and switch_state != previous:
+		if switch_stateC == 1 and switch_stateC != previous:
 			print("C")
-			pygame.mixer.Sound.play(S1)
+			pygame.mixer.Sound.play(C)
 			while pygame.mixer.music.get_busy() == True:
 				continue
 
-		if GPIO.input(switch2) == False:
-			switch_state2 = 1
+		if GPIO.input(switchD) == False:
+			switch_stateD = 1
 
-		if GPIO.input(switch2) == True:
-			switch_state2 = 0
+		if GPIO.input(switchD) == True:
+			switch_stateD = 0
 
-		if switch_state2 == 1 and switch_state2 != previous2:
+		if switch_stateD == 1 and switch_stateD != previous2:
 			print("D")
-			pygame.mixer.Sound.play(S2)
+			pygame.mixer.Sound.play(D)
 			while pygame.mixer.music.get_busy() == True:
 				continue
 
-		if GPIO.input(switch3) == False:
-			switch_state3 = 1
+		if GPIO.input(switchE) == False:
+			switch_stateE = 1
 
-		if GPIO.input(switch3) == True:
-			switch_state3 = 0
+		if GPIO.input(switchE) == True:
+			switch_stateE = 0
 
-		if switch_state3 == 1 and switch_state3 != previous3:
+		if switch_stateE == 1 and switch_stateE != previous3:
 			print("E")
-			pygame.mixer.Sound.play(S3)
+			pygame.mixer.Sound.play(E)
 			while pygame.mixer.music.get_busy() == True:
 				continue
 
-		if GPIO.input(switch4) == False:
-			switch_state4 = 1
+		if GPIO.input(switchG) == False:
+			switch_stateG = 1
 
-		if GPIO.input(switch4) == True:
-			switch_state4 = 0
+		if GPIO.input(switchG) == True:
+			switch_stateG = 0
 
-		if switch_state4 == 1 and switch_state4 != previous4:
+		if switch_stateG == 1 and switch_stateG != previous4:
 			print("G")
-			pygame.mixer.Sound.play(S4)
+			pygame.mixer.Sound.play(G)
 			while pygame.mixer.music.get_busy() == True:
 				continue
 
 		sleep(.01)
 
-		previous = switch_state
-		previous2 = switch_state2
-		previous3 = switch_state3
-		previous4 = switch_state4
+		previousC = switch_stateC
+		previousD = switch_stateD
+		previousE = switch_stateE
+		previousG = switch_stateG
 
 		current_time = time() 
 
