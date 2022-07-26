@@ -26,21 +26,23 @@ D = pygame.mixer.Sound("Piano_Samples/D.wav")
 E = pygame.mixer.Sound("Piano_Samples/E.wav")
 G = pygame.mixer.Sound("Piano_Samples/G.wav")
 
-switch_stateC = 0
-previousC = 0
-switch_stateD = 0
-previousD = 0
-switch_stateE = 0
-previousE = 0
-switch_stateG = 0
-previousG = 0
+
 
 def spin():
 
+	switch_stateC = 0
+	previousC = 0
+	switch_stateD = 0
+	previousD = 0
+	switch_stateE = 0
+	previousE = 0
+	switch_stateG = 0
+	previousG = 0
+	
 	start_time = time()
 	current_time = 0
 
-	while current_time < (start_time + 12):
+	while current_time < (start_time + 16.74):
 		if GPIO.input(switchC) == False:
 			switch_stateC = 1
 
