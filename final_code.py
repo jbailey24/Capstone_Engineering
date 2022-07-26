@@ -1,5 +1,5 @@
 import pygame
-import datetime
+from time import time
 from time import sleep
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
@@ -18,7 +18,7 @@ GPIO.setup(switch2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(switch3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(switch4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(motor, GPIO.OUT)
-GPIO.setup(buttpn, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 pygame.mixer.init()
 S1 = pygame.mixer.Sound("Piano_Samples/C.wav")
@@ -37,11 +37,11 @@ previous4 = 0
 
 def spin():
 	
-	start_time = (datetime.datetime.now().hour * 3600) + (datetime.now().minute * 60) + (datetime.now().second)
+	start_time = time()
 	current_time = 0
 	
-	while current_time >= (start_time + 12):
-  		if GPIO.input(switch) == False:
+	while current_time < (start_time + 12):
+		if GPIO.input(switch) == False:
 			switch_state = 1
 
 		if GPIO.input(switch) == True:
@@ -100,7 +100,7 @@ def spin():
 		previous3 = switch_state3
 		previous4 = switch_state4
 		
-		current_time = (datetime.datetime.now().hour * 3600) + (datetime.now().minute * 60) + (datetime.now().second) 
+		current_time = time() 
 
 while True:
 	if GPIO.input(button) == False:
