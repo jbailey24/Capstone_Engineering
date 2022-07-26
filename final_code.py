@@ -7,7 +7,7 @@ GPIO.setmode(GPIO.BCM)
 
 switch = 21
 switch2 = 26
-switch3 = 19
+switch3 = 13
 switch4 = 20
 
 motor = 18
