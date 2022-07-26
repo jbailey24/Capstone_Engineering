@@ -89,7 +89,7 @@ def spin():
 			while pygame.mixer.music.get_busy() == True:
 				continue
 
-		time.sleep(.01)
+		sleep(.01)
 
 		previous = switch_state
 		previous2 = switch_state2
@@ -106,4 +106,4 @@ while True:
 		spin()
 		GPIO.output(motor, GPIO.LOW)
 		print("off")
-	time.sleep(.01)
+	sleep(.01)
