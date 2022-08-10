@@ -57,14 +57,14 @@ def spin():
 
 	# this loop is going to run until the current time is more than 16.74 seconds past the time when the disc started spinning.
 	while current_time < (start_time + 16.74):
-		# if the swithch is on, switch_state is set to 1. If it's not, switch_state is set to 0.
+		# if the swithch is on, switch_state is set to 1. If it's off, switch_state is set to 0.
 		if GPIO.input(switchC) == False:
 			switch_stateC = 1
 
 		if GPIO.input(switchC) == True:
 			switch_stateC = 0
 
-		# if the switch is on and was not on in the last loop, then we play the file associated with C.
+		# if the switch is on and was off in the last loop, then we play the file associated with C.
 		# earlier, we essentially created a shorthand where whenever we say C, we actually mean Piano_Samples/C.wav.
 		# this is because typing all that would be lame.
 		if switch_stateC == 1 and switch_stateC != previousC:
@@ -83,7 +83,7 @@ def spin():
 			pygame.mixer.Sound.play(D)
 			while pygame.mixer.music.get_busy() == True:
 				continue
-
+		# E switch
 		if GPIO.input(switchE) == False:
 			switch_stateE = 1
 
@@ -94,7 +94,7 @@ def spin():
 			pygame.mixer.Sound.play(E)
 			while pygame.mixer.music.get_busy() == True:
 				continue
-
+		# G switch
 		if GPIO.input(switchG) == False:
 			switch_stateG = 1
 
@@ -106,9 +106,10 @@ def spin():
 			while pygame.mixer.music.get_busy() == True:
 				continue
 
-		sleep(.01) # this just holds the code still for a hundreth of a second so that the pi doesn't go completely crazy fast and overload itself.
+		sleep(.01) # this pauses the code for a hundreth of a second so that the pi doesn't run through code too quickly and get overworked.
 
-		# now we're setting up previousC, D, etc. in the next loop, when it compares the current values to what was in the previous loop, it will be comparing to these values.
+		# now we're defining previousC, D, etc. 
+		# these values will tell the code in the next loop whether the switches were on or off in the previous loop.
 		previousC = switch_stateC
 		previousD = switch_stateD
 		previousE = switch_stateE
@@ -117,10 +118,13 @@ def spin():
 		# this updates the current_time so that it's still accurate.
 		current_time = time() 
 
+		
 # down here is the actual code that gets looped through constatntly.
 # everything else was setting it all up so that the pi knows what to do and how to interpret all the inputs it's about to get.
 # now we're gonna actually get those inputs.
+
 while True:
+	
 	# translation: "if the big red button is pressed,"
 	if GPIO.input(button) == False:
 		GPIO.output(motor, GPIO.HIGH) # "turn the motor on,"
