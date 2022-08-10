@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-# this assigns certain pins on the pi to control swicthes, the motor, and the red button
+# this assigns certain pins to the pi to control swicthes, the motor, and the red button
 switchC = 21
 switchD = 26
 switchE = 13
@@ -15,7 +15,7 @@ switchG = 20
 motor = 18
 button = 16
 
-# this is just telling the pi how to interpret signals from the pins
+# this is telling the pi how to interpret signals from the pins
 GPIO.setup(switchC, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(switchD, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(switchE, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -48,8 +48,9 @@ def spin():
 	switch_stateG = 0
 	previousG = 0
 	
-	# this gets a little funky. with this next line, we are setting the variable start_time equal to the current time (in seconds since Jan 1 1970).
+	# this next line sets the variable start_time equal to the current time (in seconds since Jan 1 1970).
 	# as the code moves forward, the current time will change, but start_time will stay set to what the current time was at the time when we set it.
+	# by subtracting the start time from the current time, we can measure how long it has been since we set the start time.
 	# this is how we're going to get the motor to run for exactly 16.74 seconds.
 	start_time = time()
 	current_time = 0
