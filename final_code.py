@@ -9,11 +9,12 @@ GPIO.setmode(GPIO.BCM)
 # this assigns certain pins to the pi to control swicthes, the motor, and the red button
 switchC = 21
 switchD = 26
-switchE = 13
+switchE = 6
 switchG = 20
 
 motor = 18
 button = 16
+shutdown_button = 24
 
 # this is telling the pi how to interpret signals from the pins
 GPIO.setup(switchC, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -22,6 +23,7 @@ GPIO.setup(switchE, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(switchG, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(motor, GPIO.OUT)
 GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(shutdown_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # this is establishing what audio files from the pi's hard drive will be run with each switch.
 # if you want to change the sound that plays as a result of the C switch being pressed, change the Piano_Samples/C.wav to whatever file you'd like to play instead.
@@ -131,4 +133,15 @@ while True:
 		sleep(.01)
 		spin() # "spin the disc and play sounds accordingly,"
 		GPIO.output(motor, GPIO.LOW) # "then turn the motor off."
+	
+	# translation: "if the small interior button is pressed,"
+	if GPIO.input(shutdown_button) == False:
+		GPIO.output(motor, GPIO.LOW)	#turn the motor off
+		print("shutting down")
+		# all of this code down here just shuts down the pi
+		command = "/usr/bin/sudo /sbin/shutdown -h now"
+    		import subprocess
+    		process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+    		output = process.communicate()[0]
+    		print(output)
 	sleep(.01)
