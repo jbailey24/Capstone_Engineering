@@ -23,7 +23,7 @@ GPIO.setup(switchE, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(switchG, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(motor, GPIO.OUT)
 GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(shutdown_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(shutdown_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # this is establishing what audio files from the pi's hard drive will be run with each switch.
 # if you want to change the sound that plays as a result of the C switch being pressed, change the Piano_Samples/C.wav to whatever file you'd like to play instead.
